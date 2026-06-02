@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Snap Streak Reset",
+  "version": "1.0",
+  "description": "Auto-fills and submits Snapchat streak reset forms for multiple friends",
+  "permissions": ["tabs", "scripting", "storage"],
+  "host_permissions": ["https://help.snapchat.com/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  }
+}

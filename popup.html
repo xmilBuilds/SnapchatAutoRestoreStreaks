@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { width: 340px; background: #0f0f0f; color: #f0f0f0; padding: 16px; min-height: 200px; }
+
+    h1 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    h1 span.ghost { font-size: 18px; }
+    .subtitle { font-size: 11px; color: #666; margin-bottom: 16px; }
+
+    label { font-size: 11px; color: #888; display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    textarea {
+      width: 100%; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px;
+      color: #f0f0f0; font-size: 13px; padding: 10px; resize: none; outline: none;
+      font-family: inherit; line-height: 1.5;
+    }
+    textarea:focus { border-color: #FFFC00; }
+    textarea::placeholder { color: #444; }
+
+    .count { font-size: 11px; color: #555; text-align: right; margin-top: 4px; margin-bottom: 12px; }
+    .count span { color: #FFFC00; font-weight: 600; }
+
+    button#submit {
+      width: 100%; padding: 11px; border-radius: 8px; border: none; cursor: pointer;
+      background: #FFFC00; color: #000; font-size: 14px; font-weight: 700;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    button#submit:hover { opacity: 0.9; }
+    button#submit:active { transform: scale(0.98); }
+    button#submit:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+
+    #status-wrap { margin-top: 12px; }
+    .status-item {
+      display: flex; align-items: center; gap: 8px; padding: 7px 10px;
+      border-radius: 6px; font-size: 12px; margin-bottom: 4px;
+      background: #1a1a1a; border: 1px solid #2a2a2a;
+    }
+    .status-item .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .dot.pending { background: #555; }
+    .dot.opening { background: #FFFC00; box-shadow: 0 0 6px #FFFC00; animation: pulse 0.8s infinite; }
+    .dot.filling { background: #ff9500; box-shadow: 0 0 6px #ff9500; animation: pulse 0.8s infinite; }
+    .dot.done { background: #30d158; }
+    .dot.error { background: #ff453a; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .status-item .name { flex: 1; color: #ccc; }
+    .status-item .state { font-size: 11px; color: #666; }
+
+    .divider { border: none; border-top: 1px solid #1e1e1e; margin: 12px 0; }
+
+    .info-row { display: flex; justify-content: space-between; font-size: 11px; color: #444; margin-bottom: 8px; }
+    .info-row span:last-child { color: #666; }
+
+    #warning { font-size: 11px; color: #ff9500; background: #1a1200; border: 1px solid #3a2800; border-radius: 6px; padding: 8px 10px; margin-bottom: 12px; display: none; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1><span class="ghost">👻</span> Snap Streak Reset</h1>
+  <p class="subtitle">Opens one tab per friend and auto-submits each form</p>
+
+  <hr class="divider">
+
+  <div class="info-row">
+    <span>Your username</span><span> Username </span>
+  </div>
+  <div class="info-row">
+    <span>Email</span><span> Email </span>
+  </div>
+  <div class="info-row">
+    <span>Phone</span><span> Phone Number</span>
+  </div>
+
+  <hr class="divider">
+
+  <label>Friends' usernames</label>
+  <textarea id="friends" rows="5" placeholder="Enter one username per line:&#10;&#10;friend_one&#10;friend_two&#10;friend_three"></textarea>
+  <div class="count"><span id="count">0</span> friend(s)</div>
+
+  <div id="warning">⚠️ Opening more than 5 tabs at once may be slow. They'll open one by one with a small delay.</div>
+
+  <button id="submit" disabled>Reset Streaks</button>
+
+  <div id="status-wrap"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
